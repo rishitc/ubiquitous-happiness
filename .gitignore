@@ -1,2 +1,3 @@
 **/roughpad.txt
 .venv/*
+**/*.pyc
