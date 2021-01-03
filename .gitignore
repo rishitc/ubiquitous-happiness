@@ -1,3 +1,6 @@
 **/roughpad.txt
 .venv/*
 **/*.pyc
+.vscode/settings.json
+**/.log_*.txt
+**/log_*.log
