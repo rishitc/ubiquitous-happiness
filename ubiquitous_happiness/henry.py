@@ -8,7 +8,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 
 
-FOLDER_NAME = None
+FOLDER_PATH = None
 
 
 def browseFiles():
@@ -16,11 +16,11 @@ def browseFiles():
     Function for opening the file explorer window, to allow the user to select
     the target folder, to convert into a report.
     """
-    FOLDER_NAME = filedialog.askdirectory(initialdir="/",
+    FOLDER_PATH = filedialog.askdirectory(initialdir="/",
                                           title="Select the target folder")
 
     # Change label contents
-    label_file_explorer.configure(text="File Opened: " + FOLDER_NAME)
+    label_file_explorer.configure(text="File Opened: " + FOLDER_PATH)
 
 
 def onExit():
@@ -61,6 +61,10 @@ def file_explorer():
                                         " clicks away"),
                                    width=100, height=2,
                                    fg="blue")
+    label_file_explorer = tk.Label(window,
+                                   text="",
+                                   width=100, height=2,
+                                   fg="blue")
 
     button_explore = tk.Button(window,
                                text="Browse Files",
@@ -77,10 +81,15 @@ def file_explorer():
     # specifying rows and columns
     label_file_title.grid(column=0, row=0)
     label_file_subtitle.grid(column=0, row=1)
+    label_file_explorer.grid(column=0, row=2)
 
-    button_explore.grid(column=2, row=2)
+    button_explore.grid(column=0, row=3)
 
-    button_exit.grid(column=1, row=3)
+    button_exit.grid(column=0, row=4)
 
     # Let the window wait for any events
     window.mainloop()
+
+
+if __name__ == "__main__":
+    file_explorer()
