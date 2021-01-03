@@ -5,6 +5,7 @@ This file runs the UI of the project so that user can select the folder they
 are interested in converting into a lab report.
 """
 import tkinter as tk
+import tkinter.font as tkFont
 from tkinter import filedialog, messagebox
 from ubiquitous_happiness.logger import logging
 
@@ -44,29 +45,42 @@ def file_explorer():
     # Create the root window
     window = tk.Tk()
 
-    # Set window title
+    TITLE_STYLE = tkFont.Font(family="Lucida Grande", size=20)
+    SUB_TITLE_STYLE = tkFont.Font(family="Lucida Grande", size=16)
+
+    # Set the window title
     window.title('File Explorer')
 
-    # Set window size
+    # Set the window size
     window.geometry("500x500")
 
     # Set window background color
     window.config(background="white")
 
     # Create a File Explorer label
-    label_file_title = tk.Label(window,
-                                text="Ubiquitous Happiness",
-                                width=100, height=2,
-                                fg="blue")
+    label_frame_title = tk.Label(window,
+                                 text="Ubiquitous Happiness",
+                                 width=100, height=2,
+                                 fg="blue",
+                                 bg="white",
+                                 font=TITLE_STYLE,
+                                 padx=0,
+                                 pady=0)
+
     # Create a File Explorer label
-    label_file_subtitle = tk.Label(window,
-                                   text=("That annoying report is just a few"
-                                        " clicks away"),
-                                   width=100, height=2,
-                                   fg="blue")
+    label_frame_subtitle = tk.Label(window,
+                                    text=("That annoying report is just a few"
+                                          " clicks away"),
+                                    width=100, height=1,
+                                    fg="blue",
+                                    bg="white",
+                                    font=SUB_TITLE_STYLE,
+                                    padx=0,
+                                    pady=0)
+
     label_file_explorer = tk.Label(window,
                                    text="",
-                                   width=100, height=2,
+                                   width=100, height=1,
                                    fg="blue")
 
     button_explore = tk.Button(window,
@@ -83,8 +97,8 @@ def file_explorer():
     # the widgets at respective positions
     # in a table like structure by
     # specifying rows and columns
-    label_file_title.grid(column=0, row=0)
-    label_file_subtitle.grid(column=0, row=1)
+    label_frame_title.grid(column=0, row=0)
+    label_frame_subtitle.grid(column=0, row=1)
     label_file_explorer.grid(column=0, row=2)
 
     button_explore.grid(column=0, row=3)
