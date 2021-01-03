@@ -6,12 +6,13 @@ are interested in converting into a lab report.
 """
 import tkinter as tk
 from tkinter import filedialog, messagebox
+from ubiquitous_happiness.logger import logging
 
 
 FOLDER_PATH = None
 
 
-def browseFiles():
+def browseFiles(label_file_explorer):
     """
     Function for opening the file explorer window, to allow the user to select
     the target folder, to convert into a report.
@@ -38,6 +39,8 @@ def onExit():
 
 
 def file_explorer():
+    notebook = logging.getLogger(__name__)
+    notebook.info("el")
     # Create the root window
     window = tk.Tk()
 
@@ -68,7 +71,8 @@ def file_explorer():
 
     button_explore = tk.Button(window,
                                text="Browse Files",
-                               command=browseFiles)
+                               command=lambda:
+                               browseFiles(label_file_explorer))
 
     # Button to exit the program
     button_exit = tk.Button(window,
