@@ -30,7 +30,7 @@ def browse_files(label_file_explorer):
 
     if FOLDER_PATH:  # If the variable is not empty
         # Change label contents
-        label_file_explorer.configure(text="File Opened: " + FOLDER_PATH)
+        label_file_explorer.configure(text=f"{FOLDER_PATH}")
 
 
 def on_exit(window):
@@ -50,7 +50,7 @@ def file_explorer():
     # Create the root window
     window = tk.Tk()
     window.title('File Explorer')  # Set the window title
-    window.geometry("600x200")  # Set the window size
+    window.geometry("700x225")  # Set the window size
     # Set the background color of the window
     window.configure(background="#E9E3E6")
     notebook.debug("Top-level window has been created.")  # Log this step
@@ -104,7 +104,7 @@ def file_explorer():
                                          font=BODY_STYLE)
 
     label_folder_found = tk.Label(path_selected_frame,
-                                  text="The file",
+                                  text="",
                                   fg="#1E1923",
                                   bg="#F4CE90",
                                   font=BODY_STYLE)
@@ -138,9 +138,9 @@ def file_explorer():
 
     heading_sep.pack(side=tk.TOP, ipadx=600, fill=tk.X)
 
-    path_selected_frame.pack(side=tk.TOP, fill=tk.X)
-    label_folder_selected_pre.pack(side=tk.LEFT, padx=15)
-    label_folder_found.pack(side=tk.RIGHT, padx=15)
+    path_selected_frame.pack(side=tk.TOP, fill=tk.X, pady=50)
+    label_folder_selected_pre.pack(side=tk.LEFT, padx=15, fill=tk.X)
+    label_folder_found.pack(side=tk.RIGHT, padx=15, fill=tk.X, expand=tk.YES)
 
     button_frame.pack(side=tk.BOTTOM, fill=tk.X)
     # Buttons to display on the window
@@ -148,18 +148,6 @@ def file_explorer():
                         anchor=tk.N)
     button_confirm.pack(side=tk.RIGHT, expand=tk.YES, fill=tk.X,
                         anchor=tk.N, ipadx=30)
-
-    # Grid method is chosen for placing
-    # the widgets at respective positions
-    # in a table like structure by
-    # specifying rows and columns
-    # label_frame_title.grid(column=0, row=0)
-    # label_frame_subtitle.grid(column=0, row=1)
-    # s.grid(column=0, row=2, sticky='ew')
-    # label_file_explorer.grid(column=0, row=3)
-
-    # button_explore.grid(column=0, row=4)
-    # button_exit.grid(column=0, row=5)
 
     # Start the event loop and let the window wait for any events
     window.mainloop()
