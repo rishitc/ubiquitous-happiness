@@ -29,10 +29,10 @@ if __name__ == "__main__":
 
     # Explain the steps to create the report to the user
     console.print(("[bold cyan]So here are the steps you need to"
-                  " follow to generate your report:"), overflow="ellipsis")
-    console.print("1. Select the target folder.", overflow="ellipsis")
+                  " follow to generate your report:"), overflow="fold")
+    console.print("1. Select the target folder.", overflow="fold")
     console.print("2. Enter some metadata")
-    console.print("3. Enjoy the generated results.", overflow="ellipsis")
+    console.print("3. Enjoy the generated results.", overflow="fold")
 
     print()  # Simple blank line for formatting
 

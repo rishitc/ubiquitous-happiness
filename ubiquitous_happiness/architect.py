@@ -23,11 +23,11 @@ class Architect:
                     console.print(("[bold red]ERROR:[/bold red] The file "
                                    f"\"{err_file}\" is [bold]not[/bold] of a "
                                    "supported file type."),
-                                  overflow="ellipsis")
+                                  overflow="fold")
                     console.print(("[bold cyan]INFO:[/bold cyan] The "
                                    "supported file types are:"
                                    f" {self.SUPPORTED_IMAGE_TYPES}"),
-                                  overflow="ellipsis")
+                                  overflow="fold")
                     print()  # Simple blank line for formatting
                     console.rule(Text("Goodbye!", style="bold #B80C09"),
                                  style="#B80C09")
