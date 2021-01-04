@@ -50,7 +50,7 @@ def file_explorer():
     # Create the root window
     window = tk.Tk()
     window.title('File Explorer')  # Set the window title
-    window.geometry("600x400")  # Set the window size
+    window.geometry("600x200")  # Set the window size
     # Set the background color of the window
     window.configure(background="#E9E3E6")
     notebook.debug("Top-level window has been created.")  # Log this step
@@ -69,8 +69,7 @@ def file_explorer():
     # Creating the font style for the button
     BUTTON_STYLE = tkFont.Font(family=FONT_NAME, size=12, weight="bold")
 
-    title_subtitle_frame = tk.Frame()
-    title_subtitle_frame.pack(side=tk.TOP, fill=tk.X)
+    title_subtitle_frame = tk.Frame(bg="#E9E3E6")
 
     # Create a File Explorer label
     label_window_title = tk.Label(title_subtitle_frame,
@@ -96,24 +95,29 @@ def file_explorer():
     # of the window
     heading_sep = ttk.Separator(window, orient="horizontal")
 
-    label_folder_selected_pre = tk.Label(window,
+    path_selected_frame = tk.Frame(bg="#E9E3E6")
+    label_folder_selected_pre = tk.Label(path_selected_frame,
                                          text=("The path to the selected "
                                                "folder selected is: "),
                                          fg="#002952",
                                          bg="#E9E3E6",
                                          font=BODY_STYLE)
 
-    label_folder_found = tk.Label(window,
+    label_folder_found = tk.Label(path_selected_frame,
                                   text="The file",
-                                  fg="blue")
+                                  fg="#1E1923",
+                                  bg="#F4CE90",
+                                  font=BODY_STYLE)
 
-    button_frame = tk.Frame()
-    button_frame.pack(side=tk.BOTTOM, fill=tk.X)
+    button_frame = tk.Frame(bg="#E9E3E6")
     button_explore = tk.Button(button_frame,
                                text="Browse for Folder",
                                fg="#E9E3E6",
                                bg="#007EA7",
+                               activebackground="#00A8E0",
+                               activeforeground="#E9E3E6",
                                font=BUTTON_STYLE,
+                               relief=tk.RAISED,
                                command=lambda:
                                browse_files(label_folder_found))
 
@@ -122,16 +126,23 @@ def file_explorer():
                                text="Confirm",
                                fg="#E9E3E6",
                                bg="#587656",
+                               activebackground="#698E67",
+                               activeforeground="#E9E3E6",
                                font=BUTTON_STYLE,
+                               relief=tk.RAISED,
                                command=lambda: on_exit(window))
 
+    title_subtitle_frame.pack(side=tk.TOP, fill=tk.X)
     label_window_title.pack(side=tk.TOP, fill=tk.X)
     label_window_subtitle.pack(side=tk.TOP, fill=tk.X)
 
     heading_sep.pack(side=tk.TOP, ipadx=600, fill=tk.X)
-    # label_folder_selected_pre.pack(side=tk.LEFT)
-    # label_folder_found.pack(side=tk.RIGHT)
 
+    path_selected_frame.pack(side=tk.TOP, fill=tk.X)
+    label_folder_selected_pre.pack(side=tk.LEFT, padx=15)
+    label_folder_found.pack(side=tk.RIGHT, padx=15)
+
+    button_frame.pack(side=tk.BOTTOM, fill=tk.X)
     # Buttons to display on the window
     button_explore.pack(side=tk.LEFT, expand=tk.YES, fill=tk.X,
                         anchor=tk.N)
