@@ -12,7 +12,6 @@ from rich.text import Text
 from ubiquitous_happiness.console import console
 import ubiquitous_happiness.henry as navigator
 from ubiquitous_happiness.logger import logging
-from ubiquitous_happiness.folder_protocol import FolderIntegrity
 from ubiquitous_happiness.architect import Architect
 
 if __name__ == "__main__":
