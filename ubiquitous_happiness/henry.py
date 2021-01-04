@@ -109,6 +109,8 @@ def file_explorer():
                                   bg="#F4CE90",
                                   font=BODY_STYLE)
 
+    notebook.debug("Label have been created.")
+
     button_frame = tk.Frame(bg="#E9E3E6")
     button_explore = tk.Button(button_frame,
                                text="Browse for Folder",
@@ -132,6 +134,8 @@ def file_explorer():
                                relief=tk.RAISED,
                                command=lambda: on_exit(window))
 
+    notebook.debug("Buttons have been created.")
+
     title_subtitle_frame.pack(side=tk.TOP, fill=tk.X)
     label_window_title.pack(side=tk.TOP, fill=tk.X)
     label_window_subtitle.pack(side=tk.TOP, fill=tk.X)
@@ -149,8 +153,12 @@ def file_explorer():
     button_confirm.pack(side=tk.RIGHT, expand=tk.YES, fill=tk.X,
                         anchor=tk.N, ipadx=30)
 
+    notebook.debug("All elements have been packed.")
+
+    notebook.debug("The mainloop() has been started.")
     # Start the event loop and let the window wait for any events
     window.mainloop()
+    notebook.debug("The mainloop() has been closed.")
 
 
 if __name__ == "__main__":
