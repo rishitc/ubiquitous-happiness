@@ -13,7 +13,7 @@ from ubiquitous_happiness.console import console
 import ubiquitous_happiness.henry as navigator
 from ubiquitous_happiness.logger import logging
 from ubiquitous_happiness.folder_protocol import FolderIntegrity
-
+from ubiquitous_happiness.architect import Architect
 
 if __name__ == "__main__":
     notebook = logging.getLogger(__name__)  # Create a logger for this file
@@ -34,6 +34,9 @@ if __name__ == "__main__":
     console.print("1. Select the target folder.", overflow="ellipsis")
     console.print("2. Enter some metadata")
     console.print("3. Enjoy the generated results.", overflow="ellipsis")
+
+    print()  # Simple blank line for formatting
+
     console.rule("")
     notebook.info("Steps explained.")
 
@@ -47,3 +50,7 @@ if __name__ == "__main__":
     if FOLDER_PATH is None:
         console.print("[bold red]ERROR:[/bold red] Folder Path is None.")
         raise FileNotFoundError("Folder path selected is None!")
+
+    # Create the architect object and run the folder scan to check if it can be
+    # converted into the PDF
+    buckminster = Architect(FOLDER_PATH)
