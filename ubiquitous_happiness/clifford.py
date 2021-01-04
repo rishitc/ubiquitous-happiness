@@ -64,3 +64,7 @@ if __name__ == "__main__":
                 print()  # Simple blank line for formatting
                 console.rule(Text("Goodbye!", style="bold #B80C09"),
                              style="#B80C09")
+
+                logging.error(("File with unsupported extension found in user"
+                              "selected folder. Error file is: {err_file}}"))
+
