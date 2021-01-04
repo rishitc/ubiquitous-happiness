@@ -23,6 +23,7 @@ def browse_files(label_file_explorer):
     Function for opening the file explorer window, to allow the user to select
     the target folder, to convert into a report.
     """
+    global FOLDER_PATH
     FOLDER_PATH = filedialog.askdirectory(initialdir="/",
                                           title="Select the target folder")
 
@@ -46,11 +47,12 @@ def on_exit(window):
 
 
 def file_explorer():
+    global FOLDER_PATH
 
     # Create the root window
     window = tk.Tk()
     window.title('File Explorer')  # Set the window title
-    window.geometry("700x225")  # Set the window size
+    window.geometry("")  # Set the window size
     # Set the background color of the window
     window.configure(background="#E9E3E6")
     notebook.debug("Top-level window has been created.")  # Log this step
@@ -107,11 +109,13 @@ def file_explorer():
                                   text="",
                                   fg="#1E1923",
                                   bg="#F4CE90",
+                                  wraplength=600,
+                                  justify="left",
                                   font=BODY_STYLE)
 
     notebook.debug("Label have been created.")
 
-    button_frame = tk.Frame(bg="#E9E3E6")
+    button_frame = tk.Frame(bg="#E9E3E6", padx=10, pady=10)
     button_explore = tk.Button(button_frame,
                                text="Browse for Folder",
                                fg="#E9E3E6",
@@ -142,11 +146,12 @@ def file_explorer():
 
     heading_sep.pack(side=tk.TOP, ipadx=600, fill=tk.X)
 
-    path_selected_frame.pack(side=tk.TOP, fill=tk.X, pady=50)
+    path_selected_frame.pack(side=tk.TOP, fill=tk.X, pady=50, expand=tk.YES)
     label_folder_selected_pre.pack(side=tk.LEFT, padx=15, fill=tk.X)
-    label_folder_found.pack(side=tk.RIGHT, padx=15, fill=tk.X, expand=tk.YES)
+    label_folder_found.pack(side=tk.RIGHT, padx=15, fill=tk.X, expand=tk.YES,
+                            ipadx=5, ipady=5)
 
-    button_frame.pack(side=tk.BOTTOM, fill=tk.X)
+    button_frame.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=tk.YES)
     # Buttons to display on the window
     button_explore.pack(side=tk.LEFT, expand=tk.YES, fill=tk.X,
                         anchor=tk.N)
@@ -159,6 +164,9 @@ def file_explorer():
     # Start the event loop and let the window wait for any events
     window.mainloop()
     notebook.debug("The mainloop() has been closed.")
+
+    notebook.debug(f"Returning FOLDER_PATH = {FOLDER_PATH}")
+    return FOLDER_PATH
 
 
 if __name__ == "__main__":
