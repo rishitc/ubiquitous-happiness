@@ -10,13 +10,14 @@ from tkinter import Label, ttk
 
 
 from tkinter import filedialog, messagebox
+from typing import Sized
 from ubiquitous_happiness.logger import logging
 
 
 FOLDER_PATH = None
 
 
-def browseFiles(label_file_explorer):
+def browse_files(label_file_explorer):
     """
     Function for opening the file explorer window, to allow the user to select
     the target folder, to convert into a report.
@@ -28,7 +29,7 @@ def browseFiles(label_file_explorer):
     label_file_explorer.configure(text="File Opened: " + FOLDER_PATH)
 
 
-def onExit():
+def on_exit():
     """
     The question box to pop up when the exit button is clicked.
     """
@@ -55,10 +56,19 @@ def file_explorer():
 
     frame_titles = tk.Frame(window)
 
+    # A few constants to used for the font styles across the frame
+    FONT_NAME = "Lucida Grande"
     # Create the font styles of the title and subtitle
-    TITLE_STYLE = tkFont.Font(family="Lucida Grande", size=20, weight="bold")
-    SUBTITLE_STYLE = tkFont.Font(family="Lucida Grande", size=16,
+    TITLE_STYLE = tkFont.Font(family=FONT_NAME,
+                              size=20,
+                              weight="bold")
+    SUBTITLE_STYLE = tkFont.Font(family=FONT_NAME,
+                                 size=16,
                                  slant="italic")
+    # Creating the font style of the body
+    BODY_STYLE = tkFont.Font(family=FONT_NAME, size=12)
+    # Creating the font style for the button
+    BUTTON_STYLE = tkFont.Font(family=FONT_NAME, size=12, weight="bold")
 
     # Create a File Explorer label
     label_frame_title = tk.Label(window,
@@ -80,17 +90,19 @@ def file_explorer():
                                     font=SUBTITLE_STYLE,
                                     padx=52,
                                     pady=0)
+    notebook.debug("Title and subtitle label widgets have been created.")
 
     # Vertical line to separate the frame title and subtitle from the body
     # of the frame
     heading_sep = ttk.Separator(window, orient="horizontal")
 
-    # frame = tk.Frame(window)
-    # label_file_explorer = tk.Label(frame,
-    #                                text="The file",
-    #                                height=1,
-    #                                fg="blue")
-    # label_file_explorer.pack(side=tk.LEFT)
+    frame = tk.Frame(window)
+    label_folder_selected_pre = tk.Label(window,
+                                         text="The folder selected is: ",
+                                         fg="#002952",
+                                         bg="#E9E3E6",
+                                         font=BODY_STYLE)
+    label_folder_selected_pre.pack(side=tk.LEFT)
 
     # label_file_found = tk.Label(frame,
     #                             text="The file",
@@ -98,19 +110,30 @@ def file_explorer():
     #                             fg="blue")
     # label_file_found.pack(side=tk.RIGHT)
 
-    # button_explore = tk.Button(window,
-    #                            text="Browse Files",
-    #                            command=lambda:
-    #                            browseFiles(label_file_explorer))
+    button_explore = tk.Button(window,
+                               text="Browse for Folder",
+                               fg="#E9E3E6",
+                               bg="#007EA7",
+                               font=BUTTON_STYLE,
+                               command=lambda:
+                               browse_files(label_file_explorer))
 
-    # # Button to exit the program
-    # button_exit = tk.Button(window,
-    #                         text="Exit",
-    #                         command=onExit)
+    # Button to exit the program
+    button_confirm = tk.Button(window,
+                               text="Confirm",
+                               fg="#E9E3E6",
+                               bg="#587656",
+                               font=BUTTON_STYLE,
+                               command=on_exit)
 
     label_frame_title.pack(side=tk.TOP, fill=tk.X)
     label_frame_subtitle.pack(side=tk.TOP, fill=tk.X)
     heading_sep.pack(side=tk.TOP, ipadx=600, fill=tk.X)
+    label_folder_selected_pre.pack(side=tk.TOP)
+
+    # Buttons to display on the frame
+    button_explore.pack(side=tk.LEFT)
+    button_confirm.pack(side=tk.RIGHT)
 
     # Grid method is chosen for placing
     # the widgets at respective positions
