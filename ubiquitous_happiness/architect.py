@@ -7,10 +7,26 @@ from ubiquitous_happiness.logger import logging
 
 
 class Architect:
+    """
+    Generate the metadata from the folder structure.
+
+    This class is used to check if the folder selected is of the required
+    format create the Metadata from the folder selected.
+    """
+
     SUPPORTED_IMAGE_TYPES: List[str] = ["jpg", "jpeg", "png"]
 
     def __init__(self, folder_path: str) -> None:
+        """
+        Initialize the Architect object.
 
+        Check if the folder selected matches the format as expected by the
+        system.
+
+        :param folder_path: The path to the folder to conveter into a LaTeX
+        file.
+        :type folder_path: str
+        """
         # Create the logger for the object
         self.notebook = logging.getLogger(__name__)
 
