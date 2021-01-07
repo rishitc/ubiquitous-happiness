@@ -1,3 +1,11 @@
+"""
+Create and configure the logger for the project.
+
+This module is used to configure and create the logger for the entire project.
+All the other Python modules will import the logger from this file, then
+they'll create their own local instance of the logger and use that to log the
+details of their respective module's execution.
+"""
 import logging
 import os
 
