@@ -1,3 +1,9 @@
+"""
+Generate the intermediate form of the folder structure.
+
+This intermediate form is used for the conversion of the folder structure into
+LaTeX.
+"""
 import os
 from typing import List
 from rich.text import Text
