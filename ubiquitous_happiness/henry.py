@@ -18,10 +18,17 @@ FOLDER_PATH = None
 notebook = logging.getLogger(__name__)
 
 
-def browse_files(label_file_explorer):
+def browse_files(label_file_explorer: Label):
     """
+    Display the path selected by the user.
+
     Function for opening the file explorer window, to allow the user to select
     the target folder, to convert into a report.
+
+    :param label_file_explorer: Represents the Label widget object which
+    displays
+    the path selected by the user.
+    :type label_file_explorer: Label
     """
     global FOLDER_PATH
     FOLDER_PATH = filedialog.askdirectory(initialdir="/",
@@ -34,9 +41,15 @@ def browse_files(label_file_explorer):
         label_file_explorer.configure(text=f"{FOLDER_PATH}")
 
 
-def on_exit(window):
+def on_exit(window: tk.Tk):
     """
+    Exit sequence for the GUI.
+
     The question box to pop up when the exit button is clicked.
+
+    :param window: The object which represents the top level window in the
+    GUI.
+    :type window: tk.Tk
     """
     _msg = messagebox.askquestion(title="Confirm Exit.",
                                   message="Are you sure you want to exit?")
@@ -46,7 +59,16 @@ def on_exit(window):
         window.quit()
 
 
-def file_explorer():
+def file_explorer() -> str:
+    """
+    File explorer GUI.
+
+    Function to create and run the GUI for the file explorer to allow the user
+    to select the target folder from the GUI.
+
+    :return: The path selected by the user.
+    :rtype: str
+    """
     global FOLDER_PATH
 
     # Create the root window
@@ -146,16 +168,16 @@ def file_explorer():
 
     heading_sep.pack(side=tk.TOP, ipadx=600, fill=tk.X)
 
-    path_selected_frame.pack(side=tk.TOP, fill=tk.X, pady=50, expand=tk.YES)
+    path_selected_frame.pack(side=tk.TOP, fill=tk.X, pady=50, expand=True)
     label_folder_selected_pre.pack(side=tk.LEFT, padx=15, fill=tk.X)
-    label_folder_found.pack(side=tk.RIGHT, padx=15, fill=tk.X, expand=tk.YES,
+    label_folder_found.pack(side=tk.RIGHT, padx=15, fill=tk.X, expand=True,
                             ipadx=5, ipady=5)
 
-    button_frame.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=tk.YES)
+    button_frame.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
     # Buttons to display on the window
-    button_explore.pack(side=tk.LEFT, expand=tk.YES, fill=tk.X,
+    button_explore.pack(side=tk.LEFT, expand=True, fill=tk.X,
                         anchor=tk.N)
-    button_confirm.pack(side=tk.RIGHT, expand=tk.YES, fill=tk.X,
+    button_confirm.pack(side=tk.RIGHT, expand=True, fill=tk.X,
                         anchor=tk.N, ipadx=30)
 
     notebook.debug("All elements have been packed.")
@@ -166,6 +188,11 @@ def file_explorer():
     notebook.debug("The mainloop() has been closed.")
 
     notebook.debug(f"Returning FOLDER_PATH = {FOLDER_PATH}")
+
+    # If the FOLDER_PATH is None then assign it to the root directory
+    if FOLDER_PATH is None:
+        FOLDER_PATH = '/'
+
     return FOLDER_PATH
 
 
