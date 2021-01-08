@@ -10,7 +10,6 @@ from tkinter import Label, ttk
 
 
 from tkinter import filedialog, messagebox
-from typing import Sized
 from ubiquitous_happiness.logger import logging
 
 
