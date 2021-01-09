@@ -33,6 +33,14 @@ class Architect:
         file.
         :type folder_path: str
         """
+        # TODO: Check if the folder has only 3 levels that correspond to:
+        # 1. Section
+        # 2. Subsection
+        # 3. Subsubsection
+
+        # Store the target folder path in a instance variable
+        self.FOLDER_PATH: str = folder_path
+
         # Create the logger for the object
         self.notebook = logging.getLogger(__name__)
 
@@ -61,3 +69,8 @@ class Architect:
 
         self.notebook.info("Folder compliance scan is complete. The folder is "
                            "ready to be converted into a PDF.")
+
+
+    def generate_ir() -> None:
+        """Generates the JSON intermediate representation of the folder."""
+        
