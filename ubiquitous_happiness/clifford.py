@@ -53,3 +53,4 @@ if __name__ == "__main__":
     # Create the architect object and run the folder scan to check if it can be
     # converted into the PDF
     buckminster = Architect(FOLDER_PATH)
+    buckminster.generate_ir()
