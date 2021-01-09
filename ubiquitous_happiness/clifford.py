@@ -4,15 +4,11 @@ The User Interface.
 This file runs the UI of the project so that user can select the folder they
 are interested in converting into a lab report.
 """
-import os
-import sys
-from rich.text import Text
-
-
 from ubiquitous_happiness.console import console
 import ubiquitous_happiness.henry as navigator
 from ubiquitous_happiness.logger import logging
 from ubiquitous_happiness.architect import Architect
+
 
 if __name__ == "__main__":
     notebook = logging.getLogger(__name__)  # Create a logger for this file
