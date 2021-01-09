@@ -8,10 +8,14 @@ import os
 from typing import List
 from rich.text import Text
 import json
+import sys
+
 
 from ubiquitous_happiness.console import console
 from ubiquitous_happiness.logger import logging
 from ubiquitous_happiness.custom_types.intermediate_rep import IR
+from ubiquitous_happiness.config import DEBUG_MODE, ExitCodes
+
 
 class Architect:
     """
@@ -21,7 +25,7 @@ class Architect:
     format create the Metadata from the folder selected.
     """
 
-    SUPPORTED_IMAGE_TYPES: List[str] = ["jpg", "jpeg", "png"]
+    SUPPORTED_IMAGE_TYPES: List[str] = [".jpg", ".jpeg", ".png"]
     OUTPUT_PATH: str = os.path.join(".", "output", "IR.json")
 
     def __init__(self, folder_path: str) -> None:
@@ -48,7 +52,8 @@ class Architect:
 
         for root, _, files in os.walk(folder_path):
             for file in files:
-                if os.path.splitext(file) not in self.SUPPORTED_IMAGE_TYPES:
+                file_extension = os.path.splitext(file)[-1]
+                if file_extension not in self.SUPPORTED_IMAGE_TYPES:
                     # Get the complete path to the error-causing file
                     err_file = os.path.join(root, file)
                     print()  # Simple blank line for formatting
@@ -58,22 +63,26 @@ class Architect:
                                   overflow="fold")
                     console.print(("[bold cyan]INFO:[/bold cyan] The "
                                    "supported file types are:"
-                                   f" {self.SUPPORTED_IMAGE_TYPES}"),
-                                  overflow="fold")
+                                   f" {self.SUPPORTED_IMAGE_TYPES} but "
+                                   f"we found file type: '{file_extension}'"
+                                   ), overflow="fold")
                     print()  # Simple blank line for formatting
                     console.rule(Text("Goodbye!", style="bold #B80C09"),
                                  style="#B80C09")
 
                     self.notebook.error(("File with unsupported extension "
                                          "found in user selected folder. "
-                                         "Error file is: "
-                                         "{err_file}}"))
+                                         f"Error file is: {err_file} with"
+                                         f" extension {file_extension}"))
+                    sys.exit(ExitCodes.UNSUPPORTED_IMAGES)
 
         self.notebook.info("Folder compliance scan is complete. The folder is "
                            "ready to be converted into a PDF.")
 
     def generate_ir(self) -> None:
         """Generate the JSON intermediate representation of the folder."""
+        # TODO: Add logging statements
+
         # The path of the target folder is set as the top level
         # key of the intermediate representation.
         self.IR: IR.type = {
@@ -86,5 +95,19 @@ class Architect:
             for file in files:
                 self.IR[root].append(file)
 
-        with open(self.OUTPUT_PATH) as file_handler:
-            file_handler.write(json.dumps(self.IR))
+        if DEBUG_MODE is True:
+            console.print(json.dumps(self.IR, indent=4))
+
+        try:
+            with open(os.path.abspath(self.OUTPUT_PATH), 'w') as file_handler:
+                file_handler.write(json.dumps(self.IR, indent=4))
+        except FileNotFoundError as e:
+            console.print(("[bold red]ERROR:[/bold red] The target file"
+                          " to dump to was not found!"))
+            console.print(e)
+            console.rule(Text("Goodbye!", style="bold #B80C09"),
+                         style="#B80C09")
+            sys.exit(ExitCodes.FILE_NOT_FOUND)
+
+        console.print(("[bold green]SUCCESS:[/bold green] IR form generated "
+                      "and written to folder!"))
