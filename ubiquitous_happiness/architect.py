@@ -7,10 +7,11 @@ LaTeX.
 import os
 from typing import List
 from rich.text import Text
+import json
 
 from ubiquitous_happiness.console import console
 from ubiquitous_happiness.logger import logging
-
+from ubiquitous_happiness.custom_types.intermediate_rep import IR
 
 class Architect:
     """
@@ -21,6 +22,7 @@ class Architect:
     """
 
     SUPPORTED_IMAGE_TYPES: List[str] = ["jpg", "jpeg", "png"]
+    OUTPUT_PATH: str = os.path.join()
 
     def __init__(self, folder_path: str) -> None:
         """
@@ -70,7 +72,19 @@ class Architect:
         self.notebook.info("Folder compliance scan is complete. The folder is "
                            "ready to be converted into a PDF.")
 
+    def generate_ir(self) -> None:
+        """Generate the JSON intermediate representation of the folder."""
+        # The path of the target folder is set as the top level
+        # key of the intermediate representation.
+        self.IR: IR.type = {
+                            self.FOLDER_PATH: None
+                           }
+        for root, _, files in os.walk(self.FOLDER_PATH):
+            if self.IR.get(root) is None:
+                self.IR[root] = []
 
-    def generate_ir() -> None:
-        """Generates the JSON intermediate representation of the folder."""
-        
+            for file in files:
+                self.IR[root].append(file)
+
+        with open(self.OUTPUT_PATH) as file_handler:
+            file_handler.write(json.dumps(self.IR))
