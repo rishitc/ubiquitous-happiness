@@ -22,7 +22,7 @@ class Architect:
     """
 
     SUPPORTED_IMAGE_TYPES: List[str] = ["jpg", "jpeg", "png"]
-    OUTPUT_PATH: str = os.path.join()
+    OUTPUT_PATH: str = os.path.join(".", "output", "IR.json")
 
     def __init__(self, folder_path: str) -> None:
         """
