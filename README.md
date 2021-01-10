@@ -9,3 +9,4 @@ This project automates the process taking pictures organized into directories an
 # References:
 1. [Grid method in Tkinter](https://www.geeksforgeeks.org/python-grid-method-in-tkinter/)
 2. [Colour Palette used for the GUI and CLI](https://coolors.co/587656-007ea7-002952-e9e3e6-f4ce90-b80c09-1e1923)
+3. [Tkinter positioning](https://www.python-course.eu/tkinter_layout_management.php)
